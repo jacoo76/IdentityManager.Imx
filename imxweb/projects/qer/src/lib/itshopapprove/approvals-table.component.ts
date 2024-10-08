@@ -333,6 +333,7 @@ export class ApprovalsTableComponent implements OnInit, OnDestroy {
   }
 
   public onSearch(keywords: string): Promise<void> {
+    this.approvalsService.abortCall();
     const navigationState = {
       ...this.navigationState,
       ...{
@@ -364,8 +365,6 @@ export class ApprovalsTableComponent implements OnInit, OnDestroy {
         filters: this.dataModel.Filters,
         exportMethod
       };
-    } else {
-      this.dstSettings = undefined;
     }
   }
 

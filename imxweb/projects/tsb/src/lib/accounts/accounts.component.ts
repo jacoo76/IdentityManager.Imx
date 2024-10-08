@@ -239,31 +239,33 @@ export class DataExplorerAccountsComponent implements OnInit, OnDestroy, SideNav
       getParams.container = cUid ? cUid : undefined;
 
       const data = await this.accountsService.getAccounts(getParams);
-      const exportMethod: DataSourceToolbarExportMethod = this.accountsService.exportAccounts(this.navigationState);
-      exportMethod.initialColumns = this.displayedColumns.map((col) => col.ColumnName);
-      this.dstSettings = {
-        displayedColumns: this.displayedColumns,
-        dataSource: data,
-        entitySchema: this.entitySchemaUnsAccount,
-        navigationState: this.navigationState,
-        filters: this.filterOptions,
-        filterTree: {
-          filterMethode: async (parentkey) => {
-            return this.accountsService.getFilterTree({
-              parentkey,
-              container: getParams.container,
-              system: getParams.system,
-              filter: getParams.filter,
-            });
+      if (data) {
+        const exportMethod: DataSourceToolbarExportMethod = this.accountsService.exportAccounts(this.navigationState);
+        exportMethod.initialColumns = this.displayedColumns.map((col) => col.ColumnName);
+        this.dstSettings = {
+          displayedColumns: this.displayedColumns,
+          dataSource: data,
+          entitySchema: this.entitySchemaUnsAccount,
+          navigationState: this.navigationState,
+          filters: this.filterOptions,
+          filterTree: {
+            filterMethode: async (parentkey) => {
+              return this.accountsService.getFilterTree({
+                parentkey,
+                container: getParams.container,
+                system: getParams.system,
+                filter: getParams.filter,
+              });
+            },
+            multiSelect: false,
           },
-          multiSelect: false,
-        },
-        dataModel: this.dataModel,
-        viewConfig: this.viewConfig,
-        exportMethod,
-      };
-      this.tableName = data.tableName;
-      this.logger.debug(this, `Head at ${data.Data.length + this.navigationState.StartIndex} of ${data.totalCount} item(s)`);
+          dataModel: this.dataModel,
+          viewConfig: this.viewConfig,
+          exportMethod,
+        };
+        this.tableName = data.tableName;
+        this.logger.debug(this, `Head at ${data?.Data.length + this.navigationState?.StartIndex} of ${data.totalCount} item(s)`);
+      }
     } finally {
       isBusy.endBusy();
     }

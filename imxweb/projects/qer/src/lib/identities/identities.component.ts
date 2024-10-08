@@ -373,23 +373,26 @@ export class DataExplorerIdentitiesComponent implements OnInit, OnDestroy, SideN
       const data = this.isAdmin
         ? await this.identitiesService.getAllPersonAdmin(this.navigationState)
         : await this.identitiesService.getReportsOfManager(this.navigationState);
-      const exportMethod: DataSourceToolbarExportMethod = this.isAdmin
-        ? this.identitiesService.exportAdminPerson(this.navigationState)
-        : this.identitiesService.exportPerson(this.navigationState);
-      exportMethod.initialColumns = this.displayedColumns.map((col) => col.ColumnName);
 
-      this.dstSettings = {
-        displayedColumns: this.displayedColumns,
-        dataSource: data,
-        entitySchema: this.entitySchemaPersonReports,
-        navigationState: this.navigationState,
-        filters: this.filterOptions,
-        groupData: this.groupingInfo,
-        dataModel: this.dataModel,
-        viewConfig: this.viewConfig,
-        exportMethod,
-      };
-      this.logger.debug(this, `Head at ${data.Data.length + this.navigationState.StartIndex} of ${data.totalCount} item(s)`);
+      if (data) {
+        const exportMethod: DataSourceToolbarExportMethod = this.isAdmin
+          ? this.identitiesService.exportAdminPerson(this.navigationState)
+          : this.identitiesService.exportPerson(this.navigationState);
+        exportMethod.initialColumns = this.displayedColumns.map((col) => col.ColumnName);
+
+        this.dstSettings = {
+          displayedColumns: this.displayedColumns,
+          dataSource: data,
+          entitySchema: this.entitySchemaPersonReports,
+          navigationState: this.navigationState,
+          filters: this.filterOptions,
+          groupData: this.groupingInfo,
+          dataModel: this.dataModel,
+          viewConfig: this.viewConfig,
+          exportMethod,
+        };
+        this.logger.debug(this, `Head at ${data?.Data?.length + this.navigationState?.StartIndex} of ${data.totalCount} item(s)`);
+      }
     } finally {
       isBusy.endBusy();
     }

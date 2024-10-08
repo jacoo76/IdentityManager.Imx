@@ -115,7 +115,7 @@ export class RulesViolationsComponent implements OnInit, OnDestroy {
       this.viewConfig = await this.viewConfigService.getInitialDSTExtension(this.dataModelWrapper.dataModel, this.viewConfigPath);
 
       this.dstWrapper = new DataSourceWrapper(
-        (state) => this.rulesViolationsService.getRulesViolationsApprove(state),
+        (state, requestOpts) => this.rulesViolationsService.getRulesViolationsApprove(state, requestOpts),
         [
           entitySchema.Columns.UID_Person,
           entitySchema.Columns.UID_NonCompliance,
@@ -159,12 +159,20 @@ export class RulesViolationsComponent implements OnInit, OnDestroy {
   public async getData(parameter?: CollectionLoadParameters): Promise<void> {
     const isBusy = this.busyService.beginBusy();
     try {
-      this.dstSettings = await this.dstWrapper.getDstSettings(parameter);
-      this.dstSettings.exportMethod = this.rulesViolationsService.exportRulesViolations(parameter);
-      this.dstSettings.viewConfig = this.viewConfig;
+      const dstSettings = await this.dstWrapper.getDstSettings(parameter, { signal: this.rulesViolationsService.abortController.signal });
+      if (dstSettings) {
+        this.dstSettings = dstSettings;
+        this.dstSettings.exportMethod = this.rulesViolationsService.exportRulesViolations(parameter);
+        this.dstSettings.viewConfig = this.viewConfig;
+      }
     } finally {
       isBusy.endBusy();
     }
+  }
+
+  public onSearch(keywords: string): Promise<void> {
+    this.rulesViolationsService.abortCall();
+    return this.getData({ search: keywords });
   }
 
   public onSelectionChanged(items: RulesViolationsApproval[]): void {

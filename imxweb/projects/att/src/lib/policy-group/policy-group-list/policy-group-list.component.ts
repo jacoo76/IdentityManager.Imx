@@ -121,6 +121,7 @@ export class PolicyGroupListComponent {
     }
   }
   public async onSearch(keywords: string): Promise<void> {
+    this.policyGroupService.abortCall();
     this.navigationState = {
       ...this.navigationState,
       ...{

@@ -63,7 +63,7 @@ export class SoftwareComponent implements OnInit, SideNavigationComponent {
     private readonly metadata: MetadataService,
     private readonly sidesheet: EuiSidesheetService,
     private readonly ldsReplace: LdsReplacePipe,
-    private readonly translate: TranslateService,
+    private readonly translate: TranslateService
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -122,14 +122,17 @@ export class SoftwareComponent implements OnInit, SideNavigationComponent {
   private async navigate(): Promise<void> {
     const isBusy = this.busyService.beginBusy();
     try {
-      this.dstSettings = {
-        dataSource: await this.resourceProvider.get(this.navigationState),
-        entitySchema: this.entitySchema,
-        navigationState: this.navigationState,
-        displayedColumns: this.displayColumns,
-        filters: this.dataModel.Filters,
-        dataModel: this.dataModel,
-      };
+      const dataSource = await this.resourceProvider.get(this.navigationState);
+      if (dataSource) {
+        this.dstSettings = {
+          dataSource: dataSource,
+          entitySchema: this.entitySchema,
+          navigationState: this.navigationState,
+          displayedColumns: this.displayColumns,
+          filters: this.dataModel.Filters,
+          dataModel: this.dataModel,
+        };
+      }
     } finally {
       isBusy.endBusy();
     }

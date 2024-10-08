@@ -79,7 +79,7 @@ export class FkSelectorComponent implements OnInit {
   constructor(
     public readonly metadataProvider: MetadataService,
     private readonly settingsService: SettingsService,
-    private readonly logger: ClassloggerService,
+    private readonly logger: ClassloggerService
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -193,18 +193,21 @@ export class FkSelectorComponent implements OnInit {
 
         displayedColumns.push(DisplayColumns.DISPLAY_PROPERTY);
 
-        this.settings = {
-          dataSource: this.builder.buildReadWriteEntities(await this.selectedTable.Get(navigationState), this.entitySchema),
-          displayedColumns,
-          entitySchema: this.entitySchema,
-          filters: this.filters,
-          dataModel: this.dataModel,
-          navigationState,
-          filterTree: {
-            multiSelect: true,
-            filterMethode: async (parentKey) => this.selectedTable.GetFilterTree(parentKey),
-          },
-        };
+        const data = this.builder.buildReadWriteEntities(await this.selectedTable.Get(navigationState), this.entitySchema);
+        if (data) {
+          this.settings = {
+            dataSource: data,
+            displayedColumns,
+            entitySchema: this.entitySchema,
+            filters: this.filters,
+            dataModel: this.dataModel,
+            navigationState,
+            filterTree: {
+              multiSelect: true,
+              filterMethode: async (parentKey) => this.selectedTable.GetFilterTree(parentKey),
+            },
+          };
+        }
       } finally {
         isBusy.endBusy();
       }

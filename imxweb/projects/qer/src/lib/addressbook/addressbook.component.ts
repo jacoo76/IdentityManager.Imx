@@ -78,7 +78,11 @@ export class AddressbookComponent implements OnInit {
         'address-book'
       );
 
-      this.dstSettings = await this.dstWrapper.getDstSettings({ PageSize: this.settingsService.DefaultPageSize, StartIndex: 0 });
+      this.addressbookService.abortCall();
+      this.dstSettings = await this.dstWrapper.getDstSettings(
+        { PageSize: this.settingsService.DefaultPageSize, StartIndex: 0 },
+        { signal: this.addressbookService.abortController.signal }
+      );
     } finally {
       isBusy.endBusy();
     }
@@ -143,10 +147,17 @@ export class AddressbookComponent implements OnInit {
   }
 
   public async onSearch(search: string): Promise<void> {
+    this.addressbookService.abortCall();
     const isBusy = this.busyService.beginBusy();
 
     try {
-      this.dstSettings = await this.dstWrapper.getDstSettings({ StartIndex: 0, search });
+      const dstSettings = await this.dstWrapper.getDstSettings(
+        { StartIndex: 0, search },
+        { signal: this.addressbookService.abortController.signal }
+      );
+      if (dstSettings) {
+        this.dstSettings = dstSettings;
+      }
     } finally {
       isBusy.endBusy();
     }

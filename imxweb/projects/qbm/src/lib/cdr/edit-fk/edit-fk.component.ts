@@ -486,53 +486,56 @@ export class EditFkComponent implements CdrEditor, AfterViewInit, OnDestroy, OnI
         }
         this.parameters = { ...this.parameters, ...newState };
         const candidateCollection = await this.selectedTable.Get(this.parameters);
-        this.candidatesTotalCount = candidateCollection?.TotalCount;
 
-        this.isHierarchical = candidateCollection.Hierarchy != null;
+        if (candidateCollection) {
+          this.candidatesTotalCount = candidateCollection?.TotalCount;
 
-        const multipleFkRelations = this.columnContainer.fkRelations && this.columnContainer.fkRelations.length > 1;
-        const identityRelatedTable = this.selectedTable.TableName === 'Person';
+          this.isHierarchical = candidateCollection.Hierarchy != null;
 
-        const newCandidates = candidateCollection.Entities?.map((entityData) => {
-          let key: string = '';
-          let detailValue: string = entityData.LongDisplay ?? '';
-          const defaultEmailColumn = entityData.Columns?.['DefaultEmailAddress'];
-          /**
-           * If the candidates data relate to identities (fkRelation Person table)
-           * then we want to use the email address for the detail line (displayLong)
-           */
-          if (defaultEmailColumn && identityRelatedTable) {
-            detailValue = defaultEmailColumn.Value;
-          }
-          if (multipleFkRelations) {
-            this.logger.trace(this, 'dynamic foreign key');
-            const xObjectKeyColumn = entityData.Columns?.['XObjectKey'];
-            key = xObjectKeyColumn ? xObjectKeyColumn.Value : undefined;
-          } else {
-            this.logger.trace(this, 'foreign key');
+          const multipleFkRelations = this.columnContainer.fkRelations && this.columnContainer.fkRelations.length > 1;
+          const identityRelatedTable = this.selectedTable.TableName === 'Person';
 
-            const parentColumn = entityData.Columns ? entityData.Columns[this.columnContainer.fkRelations[0].ColumnName] : undefined;
-            if (parentColumn != null) {
-              this.logger.trace(this, 'Use value from explicit parent column');
-              key = parentColumn.Value;
-            } else {
-              this.logger.trace(this, 'Use the primary key');
-              const keys = entityData.Keys;
-              key = keys && keys.length ? keys[0] : '';
+          const newCandidates = candidateCollection.Entities?.map((entityData) => {
+            let key: string = '';
+            let detailValue: string = entityData.LongDisplay ?? '';
+            const defaultEmailColumn = entityData.Columns?.['DefaultEmailAddress'];
+            /**
+             * If the candidates data relate to identities (fkRelation Person table)
+             * then we want to use the email address for the detail line (displayLong)
+             */
+            if (defaultEmailColumn && identityRelatedTable) {
+              detailValue = defaultEmailColumn.Value;
             }
+            if (multipleFkRelations) {
+              this.logger.trace(this, 'dynamic foreign key');
+              const xObjectKeyColumn = entityData.Columns?.['XObjectKey'];
+              key = xObjectKeyColumn ? xObjectKeyColumn.Value : undefined;
+            } else {
+              this.logger.trace(this, 'foreign key');
+
+              const parentColumn = entityData.Columns ? entityData.Columns[this.columnContainer.fkRelations[0].ColumnName] : undefined;
+              if (parentColumn != null) {
+                this.logger.trace(this, 'Use value from explicit parent column');
+                key = parentColumn.Value;
+              } else {
+                this.logger.trace(this, 'Use the primary key');
+                const keys = entityData.Keys;
+                key = keys && keys.length ? keys[0] : '';
+              }
+            }
+            return {
+              DataValue: key,
+              DisplayValue: entityData.Display,
+              displayLong: detailValue,
+            };
+          });
+          if (concatCandidates) {
+            this.candidates.push(...(newCandidates || []));
+            this.savedCandidates = this.candidates;
+          } else {
+            this.candidates = newCandidates || [];
+            this.savedCandidates = this.candidates;
           }
-          return {
-            DataValue: key,
-            DisplayValue: entityData.Display,
-            displayLong: detailValue,
-          };
-        });
-        if (concatCandidates) {
-          this.candidates.push(...(newCandidates || []));          
-          this.savedCandidates = this.candidates;
-        } else {
-          this.candidates = newCandidates || [];
-          this.savedCandidates = this.candidates;
         }
       } finally {
         this.loading = false;

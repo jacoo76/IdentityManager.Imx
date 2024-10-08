@@ -194,7 +194,7 @@ export abstract class EditorBase<T = any> implements CdrEditor, OnDestroy {
    * @param value the new value
    */
   private async writeValue(value: any): Promise<void> {
-    if (this.control.errors && Object.keys(this.control.errors).some((elem) => elem !== 'generalError')) {
+    if (this.control.errors) {
       this.logger.debug(this, 'writeValue - client validation failed');
       return;
     }

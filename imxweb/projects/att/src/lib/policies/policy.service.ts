@@ -61,6 +61,8 @@ import { PolicyCopyData } from './policy.interface';
   providedIn: 'root',
 })
 export class PolicyService {
+  public abortController = new AbortController();
+
   private readonly apiClientMethodFactory = new V2ApiClientMethodFactory();
 
   constructor(
@@ -83,12 +85,15 @@ export class PolicyService {
     return this.api.typedClient.PortalAttestationPolicyEditInteractive.GetSchema();
   }
 
-  public async getPolicies(parameters: PolicyLoadParameters): Promise<ExtendedTypedEntityCollection<AttestationPolicy, {}>> {
-    const collection = await this.api.typedClient.PortalAttestationPolicy.Get(parameters);
+  public async getPolicies(parameters: PolicyLoadParameters): Promise<ExtendedTypedEntityCollection<AttestationPolicy, {}> | undefined> {
+    const collection = await this.api.typedClient.PortalAttestationPolicy.Get(parameters, { signal: this.abortController.signal });
+    if (!collection) {
+      return undefined;
+    }
     return {
-      tableName: collection.tableName,
-      totalCount: collection.totalCount,
-      Data: collection.Data.map((element, index) => new AttestationPolicy(element.GetEntity())),
+      tableName: collection?.tableName,
+      totalCount: collection?.totalCount,
+      Data: collection?.Data.map((element, index) => new AttestationPolicy(element.GetEntity())),
     };
   }
 
@@ -235,6 +240,11 @@ export class PolicyService {
       ],
     });
     return element.totalCount;
+  }
+
+  public abortCall(): void {
+    this.abortController.abort();
+    this.abortController = new AbortController();
   }
 
   private async copyPropertiesFrom(

@@ -65,6 +65,7 @@ export interface test {
 @Injectable({ providedIn: 'root' })
 export class InitService {
   private esetTag = 'ESet';
+  private abortController = new AbortController();
 
   constructor(
     private readonly router: Router,
@@ -127,16 +128,24 @@ export class InitService {
       resp: this.api.typedClient.PortalRespEset,
       adminType: PortalAdminRoleEset,
       admin: {
-        get: async (parameter: any) =>
-          this.api.client.portal_admin_role_eset_get({
-            OrderBy: parameter.OrderBy,
-            StartIndex: parameter.StartIndex,
-            PageSize: parameter.PageSize,
-            filter: parameter.filter,
-            search: parameter.search,
-            risk: parameter.risk,
-            esettype: parameter.esettype,
-          }),
+        get: async (parameter: any) => {
+          if (parameter?.search !== undefined) {
+            // abort the request only while searching
+            this.abortCall();
+          }
+          return this.api.client.portal_admin_role_eset_get(
+            {
+              OrderBy: parameter.OrderBy,
+              StartIndex: parameter.StartIndex,
+              PageSize: parameter.PageSize,
+              filter: parameter.filter,
+              search: parameter.search,
+              risk: parameter.risk,
+              esettype: parameter.esettype,
+            },
+            { signal: this.abortController.signal }
+          );
+        },
       },
       adminSchema: this.api.typedClient.PortalAdminRoleEset.GetSchema(),
       dataModel: new EsetDataModel(this.api),
@@ -247,5 +256,10 @@ export class InitService {
       config.unshift(route);
     });
     this.router.resetConfig(config);
+  }
+
+  private abortCall(): void {
+    this.abortController.abort();
+    this.abortController = new AbortController();
   }
 }

@@ -31,6 +31,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { ComplianceFeatureConfig, PortalRules, PortalRulesViolations, V2ApiClientMethodFactory } from 'imx-api-cpl';
 import {
+  ApiRequestOptions,
   CollectionLoadParameters,
   CompareOperator,
   DataModel,
@@ -56,6 +57,8 @@ import { RulesViolationsLoadParameters } from './rules-violations-load-parameter
   providedIn: 'root',
 })
 export class RulesViolationsService {
+  public abortController = new AbortController();
+
   private busyIndicator: OverlayRef;
   private busyIndicatorCounter = 0;
 
@@ -104,20 +107,28 @@ export class RulesViolationsService {
    * @returns a list of {@link PortalRulesViolations|PortalRulesViolationss}
    */
   public async getRulesViolationsApprove(
-    parameters?: CollectionLoadParameters
-  ): Promise<ExtendedTypedEntityCollection<RulesViolationsApproval, unknown>> {
+    parameters?: CollectionLoadParameters,
+    requestOpts?: ApiRequestOptions
+  ): Promise<ExtendedTypedEntityCollection<RulesViolationsApproval, unknown> | undefined> {
     this.logger.debug(this, `Retrieving all rule violations to approve`);
     this.logger.trace('Navigation state', parameters);
-    const collection = await this.cplClient.typedClient.PortalRulesViolations.Get({
-      approvable: true,
-      ...parameters,
-    });
+    const collection = await this.cplClient.typedClient.PortalRulesViolations.Get(
+      {
+        approvable: true,
+        ...parameters,
+      },
+      requestOpts
+    );
+
+    if (!collection) {
+      return undefined;
+    }
 
     const hasRiskIndex = (await this.systemInfoService.get()).PreProps.includes('RISKINDEX');
     return {
-      tableName: collection.tableName,
-      totalCount: collection.totalCount,
-      Data: collection.Data.map((item: PortalRulesViolations) => new RulesViolationsApproval(item, hasRiskIndex, this.translate)),
+      tableName: collection?.tableName,
+      totalCount: collection?.totalCount,
+      Data: collection?.Data.map((item: PortalRulesViolations) => new RulesViolationsApproval(item, hasRiskIndex, this.translate)),
     };
   }
 
@@ -168,5 +179,10 @@ export class RulesViolationsService {
       ],
     });
     return call.Data[0];
+  }
+
+  public abortCall(): void {
+    this.abortController.abort();
+    this.abortController = new AbortController();
   }
 }

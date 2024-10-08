@@ -28,7 +28,7 @@
           <mat-card>
             <div class="imx-table-container">
               <imx-data-source-toolbar #dst [options]="['search']" [settings]="dstSettings" [busyService]="busyService"
-                (search)="getData({ search: $event })" (navigationStateChanged)="getData($event)"
+                (search)="onSearch($event)" (navigationStateChanged)="getData($event)"
                 data-imx-identifier="itshop-pattern-sidesheet-dst">
               </imx-data-source-toolbar>
               <imx-data-table #dataTable [dst]="dst" class="imx-patterns-table" [detailViewVisible]="false"

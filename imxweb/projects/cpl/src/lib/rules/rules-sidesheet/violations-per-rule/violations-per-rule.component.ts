@@ -65,8 +65,11 @@ export class ViolationsPerRuleComponent implements OnInit {
     };
 
     this.dstWrapper = new DataSourceWrapper(
-      (state) =>
-        this.rulesViolationsService.getRulesViolationsApprove({ ...state, ...{ uid_compliancerule: this.uidRule, approvable: undefined } }),
+      (state, requestOpts) =>
+        this.rulesViolationsService.getRulesViolationsApprove(
+          { ...state, ...{ uid_compliancerule: this.uidRule, approvable: undefined } },
+          requestOpts
+        ),
       [
         this.entitySchema.Columns.UID_Person,
         this.entitySchema.Columns.State,
@@ -132,9 +135,17 @@ export class ViolationsPerRuleComponent implements OnInit {
   public async getData(parameter?: CollectionLoadParameters): Promise<void> {
     this.rulesViolationsService.handleOpenLoader();
     try {
-      this.dstSettings = await this.dstWrapper.getDstSettings(parameter);
+      const dstSettings = await this.dstWrapper.getDstSettings(parameter, { signal: this.rulesViolationsService.abortController.signal });
+      if (dstSettings) {
+        this.dstSettings = dstSettings;
+      }
     } finally {
       this.rulesViolationsService.handleCloseLoader();
     }
+  }
+
+  public onSearch(keywords: string): Promise<void> {
+    this.rulesViolationsService.abortCall();
+    return this.getData({ search: keywords });
   }
 }

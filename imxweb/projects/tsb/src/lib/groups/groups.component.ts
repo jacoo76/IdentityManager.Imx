@@ -386,34 +386,36 @@ export class DataExplorerGroupsComponent implements OnInit, OnDestroy, SideNavig
           ? await this.groupsService.getGroups(getParams)
           : await this.groupsService.getGroupsResp(getParams);
 
-      const exportMethod =
-        this.isAdmin || this.unsAccountIdFilter
-          ? this.groupsService.exportGroups(getParams)
-          : this.groupsService.exportGroupsResp(getParams);
-      exportMethod.initialColumns = this.displayedColumns.map((col) => col.ColumnName);
+      if (data) {
+        const exportMethod =
+          this.isAdmin || this.unsAccountIdFilter
+            ? this.groupsService.exportGroups(getParams)
+            : this.groupsService.exportGroupsResp(getParams);
+        exportMethod.initialColumns = this.displayedColumns.map((col) => col.ColumnName);
 
-      this.dstSettings = {
-        displayedColumns: this.displayedColumns,
-        dataSource: data,
-        entitySchema: this.entitySchemaUnsGroup,
-        navigationState: this.navigationState,
-        filters: this.filterOptions,
-        filterTree: {
-          filterMethode: async (parentkey) => {
-            return this.groupsService.getFilterTree({
-              parentkey,
-              container: getParams.container,
-              system: getParams.system,
-              uid_unsaccount: getParams.uid_unsaccount,
-            });
+        this.dstSettings = {
+          displayedColumns: this.displayedColumns,
+          dataSource: data,
+          entitySchema: this.entitySchemaUnsGroup,
+          navigationState: this.navigationState,
+          filters: this.filterOptions,
+          filterTree: {
+            filterMethode: async (parentkey) => {
+              return this.groupsService.getFilterTree({
+                parentkey,
+                container: getParams.container,
+                system: getParams.system,
+                uid_unsaccount: getParams.uid_unsaccount,
+              });
+            },
+            multiSelect: false,
           },
-          multiSelect: false,
-        },
-        dataModel: this.dataModel,
-        viewConfig: this.viewConfig,
-        exportMethod,
-      };
-      this.logger.debug(this, `Head at ${data.Data.length + this.navigationState.StartIndex} of ${data.totalCount} item(s)`);
+          dataModel: this.dataModel,
+          viewConfig: this.viewConfig,
+          exportMethod,
+        };
+        this.logger.debug(this, `Head at ${data.Data.length + this.navigationState.StartIndex} of ${data.totalCount} item(s)`);
+      }
     } finally {
       isBusy.endBusy();
     }
