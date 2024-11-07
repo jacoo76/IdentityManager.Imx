@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master, v82, v90, v92 ]
+    branches: [ master, v82, v90, v92, v93 ]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-        node-version: [14.x]
+        node-version: [18.x]
     
     steps:
     - uses: actions/checkout@v3

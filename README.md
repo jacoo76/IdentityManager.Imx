@@ -4,253 +4,10 @@
 
 ## Change log
 
-### August 12, 2024
-- 459770: Fixed an issue where the request parameter validation result was not working on first input.
-- 462048: Fixed an issue with delegation search caching.
-- 461659: Fixed an issue regarding delegation or ESet requests on the Request History page.
-- 460151: Fixed an issue with the QueryWhereClause evaluation during the value check on updated parameter.
-- 460511: Fixed an issue that causes the side navigation on New Request to show search results twice.
-- 461414: Fixed the scrollability of the Operation Support Portal's Process view 
-- 462785: Fixed an UI issue regarding the alignment for the column "User account is disabled" and its data.
+### November 11, 2024
 
-
-### July 30, 2024
-
-The v92 branch has been updated with fixes for the following issues.
-
-- 459707: Fixed an issue on the New Request page, where only results up to the first child service category were returned.
-- 461733: Updated third-party package versions for security reasons.
-- 460431: Fixed the export of requests for the chief approval team.
-- 458431: Fixed the inconsistent handling of columns that were added/removed from the ServerConfig/ITShopConfig/AccProductProperties configuration.
-- 460184: Fixed an issue with starting attestation policies.
-- 453124: Fixed a translation issue on the "show selected" view on the New Request page.
-
-### July 3, 2024
-
-We have added a [list of changes from v91 to v92](imxweb/changes/changesFrom9.1.1To9.2.0.md).
-
-The v92 branch has been updated with fixes for the following issues.
-
-- 456920: Error during approval of ITShop equest, if the request contains a parameter with a ValuationScript
-- 457344: Members of the chief approval team can't open an attestation case by using a direct URL
-- 434023: Fixed loading a saved view using target system filtering
-- 458023: Fixed the display of additional approvers in history view
-- 455928: Fixed an issue where the Device Ownership menu item was still visible even when the  VI_Hardware_Enabled configuration setting was disabled
-- 456918: Added Compodoc sample for MenuFactory
-- 458137: The attestation case was saved once before it is approved, which is often unnecessary
-- 455931: System entitlements: Restoring view with multiple target systems fails
-- 459617: Fixed an issue with line-break characters in CDR editor view components
-- 458984: Fixed an issue with formatting script processing
-- 455119: The configuration setting `DisableHyperViewNavigation`, scoped to Portal, also affected hyperview navigation in Operations Support Web Portal.
-- 455118: Fixed an issue where Operations Support Web Portal accessed a Web Portal endpoint
-- 458570: Fixed an issue with showing the currently selected service category and other options
-- 458294: Fixed an issue with Hyperview navigation ("Number of primary key columns does not match")
-- 454798: Fixed an issue where the list of service items was not updated when requesting by reference user
-- 456379: Fixed an issue where a service category's properties were not translated
-- 458001: Fixed an issue with theme's color settings not being applied to the login page
-- 456786: Fixed an accessibility issue with the entries in a drop-down list
-- 456472: Fixed a navigation issue in accountability HyperViews
-- 458688: Fixed the plugin view in Administration Portal
-- 453124: Fixed the "show selected" button caption on new requests page (issue 134)
-- 455930: Fixed an issue with device management menu items still showing when the "Hardware" configuration parameter was disabled
-
-### May 24, 2024
-
-The v92 branch has been updated with fixes for the following issues.
-
-- 453132: Attestation Policies: Edit Attestation Policy: Setting Condition: The objects matching the condition are not displayed hierarchically
-- 449292: Fixed an issue during creation of a cart item
-- 455291: Fixed the output paths for the compodoc files
-- 453350: Fixed an issue where the user could not save dynamic role membership changes after adding another condition to a new role
-- 455703: Fixed a state issue of the save button during creation of a report
-
-### May 6, 2024
-
-We are integrating [Compodoc](https://compodoc.app/) to provide Angular documentation for our components. Please see the [Documentation](#documentation) section for more information on how to generate documentation.
-
-The package versions have been updated to 9.2.1.
-
-The `v92` branch has been updated with fixes for the following issues.
-
-**Important**: Integrating these changes will require a server-side hotfix for the issue 454356 to be installed if the server has _not_ been upgraded to 9.2.1.
-
-- 454675: Fixed an issue where sometimes a blank screen was displayed instead of the login page
-- 446439: Fixed the preselection of a child service category on the new request page
-- 440745: Fixed the preset of the search term on the new request page
-- 454356: Data Explorer identities needs to load interactive entities.
-- 453350/447417/453346: Fixed issues where the filter wizard could enter an inconsistent state
-- 453132: Fixed an issue in the attestation policy editor where the "objects matching the condition" were not displayed hierarchically
-- 438231: Added documentation of some basic components
-- 450070: Fixed an issue where switching to another page while loading a page caused an error
-- 453932: Fixed an issue where approving multiple requests in bulk could cause an error
-- 439918: Fixed some issues in the product bundles component
-- 450675: Fixed an issue where some help text was shown in an incorrect language
-- 452886: Fixed an issue in the attestation policy editor
-- 449616: Fixed an issue where reports could not be saved in format other then PDF
-- 450404: Fixed an issue in the overview of attestation case approvers.
-- 442324: Duplicate (additional) "Target system" columns in the Data Explorer
-- 448531: Fixed a scrolling issue on the organizational chart view
-- 449891: Fixed the inherited group membership pagination
-- 448406: Fixed an issue where the list of entitlements assigned to a role was incomplete
-- 418493: Fixed an issue in the overview of request approvers
-- 447713: Fixed a styling issue with the login button
-- 449124: Fixed the declaration of the metadata service
-- 447723: Fixed an issue with additional columns in a grouped table view
-- 442324: Fixed the duplicate "Target system" columns in the Data Explorer
-- 447039: Fixed an issue where the FK picker could enter an inconsistent state
-
-### March 11, 2024
-
-The v92 branch has been updated with fixes for the following issues.
-
-- 447996: In DataSource Toolbar, opening a view which has custom filters, adds custom filters to the GET, but not the UI
-- 447997: In DataSource Toolbar, Reset view removes custom filters from GET, but not from the UI
-- 447702: Filtering: Canceling defining a filter does not reset filters (reappearing)
-- 446439: Portal should support pre-selections by URL parameter
-- 442023: Add configuration to globally enable HyperView navigation
-- 446435: Attestation case details: Object picker in hyperview tab shows user-friendly display names
-- 448406: Not all entitlements were visible in the product request details for a role
-- 446478: The number of pending requests and shopping cart items were not being updated correctly.
-- 447474: Fixed masthead color when applying a custom theme
-
-### February 28, 2024
-
-The v92 branch has been updated with fixes for the following issues.
-
-- Bug 447702: Web Portal: Filtering: Canceling the definition a filter does not reset filters (reappearing)
-- Bug 447018: In Data Explorer System Entitlements, the defaultness of a table column can be changed by loading a view
-- Bug 444890: Portal: Selected products on New Request page are not reloaded when user changes
-- Bug 434023: Filtering user accounts by target system, when loaded a saved view, causes UI issues
-- Bug 446516: User dependent column cache in filter wizard does not update when user changes
-- Bug 446585: My responsibilities / System entitlements: Child system entitlements: Odd/empty target system information
-- Bug 445251: Clicking while load spinner is visible prevents result sidesheet to remain open
-- Bug 445482: Risk index functions are visible when RISKINDEX condition is off
-- Bug 444322: Address book: Added column disappears in grouping
-- Bug 444321: Attestation runs - Run numbers column loses values when grouping
-- Bug 442287: Attestation runs - Run numbers column from saved view shows zero values
-- Bug 444543: Additional manager has no permission to access 'Create application role' side sheet
-- Bug 444268: Portal: Selected products when selecting products by reference user disappear
-- Bug 418493: List of current approvers is incomplete as sibling steps of the current decision level are ignored
-- Bug 425801: The shopping cart does not suggest that a partial check or partial submit is possible
-- Bug 445856: Github: CDR required logic was inverted
-- Bug 446295: Github issue 112: Unable to save the changes to a dynamic business role after adding another condition
-- Bug 446190: Data Explorer / History sidesheet tab: switching from "Timeline" to "Table" view resets the date filter
-- Bug 444602: Github: Filtering not working on account-sidesheet
-- Bug 445927: Administration Portal: On smaller screens the menu is not visible
-- Bug 445169: Operations Support Portal: Operation history: Type of operation not shown when language is German
-- Bug 442577: Column picker for view configuration shows wrong columns
-- Bug 420941: Web application overview: Clicking the title opens the Administration Portal
-- Bug 446290: Portal: System entitlement ownership: Drop-down list does not load all entries
-- Bug 447700: Portal: New request: Tabs are not using context-sensitive help
-- Bug 447417: In Filter Data sidesheet, custom filters for properties, which have datatype double, allow non-numerical values
-- Bug 446996: Only 20 child categories of a service category are displayed on the New Request page
-- Bug 443469: In Filter Data sidesheet, existing custom filters can be mutated , even if the user cancels the sidesheet
-- Bug 446342: Web Portal: Hyperviews: Clicking some tiles only reloads the currently displayed hyperview and breaks navigation history
-- Bug 446263: Product bundle selection: Text search overrides Custom filters instead of narrowing down its results
-- Bug 446162: Data Explorer: Missing date restriction in Status comparison view
-- Bug 446188: Data Explorer: Switching history view from "Events" to "Status overview" and back produces date filter that does not match the events shown
-- Bug 446167: Hyperview navigation from object shape does not work
-- 440883: Portal: Pending attestations: Hyperviews: Add object types to list
-- 438294: Portal allows navigation in Hyperviews
-- Bug 432848: New Request: within the view of selected products, sorting was not correctly implemented
-- Bug 443469: In Filter Data sidesheet, existing custom filters can be mutated in sneaky ways, even if the user cancels the sidesheet
-- Bug 441058: Portal: Select page index is not reset when the filter changes
-
-### January 16, 2024
-
-The v92 branch has been updated with fixes for the following issues.
-
-- Bug 441844: In Filter Data sidesheet, within Custom Filters, picking a different limited value does not cause the form to be submittable
-- Bug 441185: Exception when trying to add entitlements to a role
-- Bug 427186: Exporting table views: "Export Data"-SideSheet: Names of columns to export ignores the user interface setting "Use profile language"=OFF
-- Bug 436033: Extra word in the no-data message for Archived Requests
-- Bug 439550: Tiles no longer update the number of open items
-- Bug 441967: Requests: Product bundles: Changes to product bundles are applied to overview table without saving
-- Bug 439915: New request: Product bundles: Filter icon and search bar displayed incorrectly/cut
-- Bug 433912: In Edit Identity sidesheet, within Rule Violations tab, upon searching, filtering or paging, the data table gets more and more columns
-- Bug 441745: Search by keywords: Unnecessary space before colon
-- Bug 441753: User interface settings: When clicking on "Reset" not the default theme will be applied, but the Device Theme
-- Bug 441217: Github bug: Custom theming is ignored by default config parameter
-- Bug 441754: Manually reloading page resets the theme
-- Bug 441167: Compliance rules: Rule violations: Buttons are displayed although identity has no permission to decide
-- Bug 441122: Sorting: "Search" is not translated
-- Bug 441320: Inactive identities listed in "My Direct Reports" start page tile but not if you follow the "VIEW" link of that tile
-- Bug 440754: Compliance Rules: Defining filters on "View Compliance Rule Details sidesheet" also applies filter to "Compliance Rules" page; results in bugged out Material Chips and JS errors (TypeError: e is undefined)
-- Bug 440143: Grouping a data table, after additional columns were added, results in 400 Bad Request in most pages
-- Bug 441161: The "No Product Bundle Selected" information disappear
-- Bug 439720: Drop-down CDR editor clears itself too easily
-- Bug 440478: HTML5-Web: Missing scrollbar in View Attestation Run Details\Attestors in OneIM 9.2.0 (issue does not exist in 9.1.1)
-- Bug 440952: Requests: Pending requests: Useless information in details of a request
-- Bug 439739: Duplicate service categories on the request page
-- Bug 441943: Logs - Time filter LDS key is wrong
-- Bug 441975: Chip container of Datasource-Toolbar is displayed in the same row together with search box and buttons
-- Bug 442118: Parameter filter tree does not work
-- Bug 442119: Changed permission notification: Several errors when clicking notification
-- Bug 439266: Data Explorer doesn't open
-- Bug 440720: Compliance Rules with custom view set as default - TypeError: Cannot read properties of undefined (reading 'headerCell')
-- Bug 326746: Application Governance: Cannot change publish state of automatically assigned entitlements
-- Bug 442711: Exception after closing filter: TypeError: Cannot read properties of undefined (reading 'dirty')
-- Bug 443104: In DataSource Toolbar, for grouped results, changing the column order results in seemingly arbitrary column ordering
-- Bug 439914: New request: Product bundles: Product bundle selection: Custom filters not working
-- Product Backlog Item 440711: Implemented proposals from git hub
-- Bug 442757: Admin Portal: The labeling of the Y-axis of the session charts is not recognizable
-- Bug 443316: ServiceCategoryComponent snackbar message are not translated
-
-### December 12, 2023
-
-- Added some [code samples](sdk_samples/README.md) with explanations.
-
-### December 7, 2023
-
-The v92 branch has been updated with fixes for the following issues.
-
-- Add missing translation keys
-- Bug 432754: In Filter Data Sidesheet, by toggling a predefined filter, client side validation can be bypassed, which causes frontend and backend errors.
-- Bug 432757: In Filter Data Sidesheet, by editing a custom filter, multiple copies of the same filter is appended to the url growing it to huge lengths.
-- Bug 432826: In Data Explorer, Business Roles, custom filters cannot be added or removed, instead they raise JS errors.
-- Bug 435259: Portal: The title of the PeerGroupDiscardSelectedComponent dialog is not translated.
-- Bug 433890: In DataSource Toolbar, overriding an existing saved view adds a new saved view entry to the UI.
-- Bug 436537: 9.2 - Operations Portal: bug in Pending Provisioning Process.
-- Bug 433973: Configuration key "Request configuration / Products can be requested through reference user" has no effect.
-- Bug 433974: Configuration key "Request configuration / Product bundles can be used" has no effect.
-- Bug 433925: UI fix: My processes page crops content.
-- Bug 439229: Attestation Runs page simply does not apply the custom filters to the GET request.
-- Bug 434024: Special filtering, like User Accounts Target system based narrowing, does not properly work with other filters.
-- Bug 433599: Operations Support Portal: Password Tab is empty.
-- Bug 438828: Security Fix: Update crypto-js to version 4.2.0.
-- Bug 438829: Security Fix: Update @babel/traverse to version 7.23.2.
-- Bug 440143: Grouping a data table, after additional columns were added, results in 400 Bad Request in most pages.
-- Bug 440283: Error opening sidesheet in addressbook - TypeError: Reduce of empty array with no initial value.
-- Bug 440037: OpsWeb cannot be started (endless loop).
-
-### October 20, 2023
-
-- The repository has been updated with the source code for the Identity Manager 9.2 release in the `v92` branch.
-  For information about new features and enhancements in this version, please refer to the Identity Manager 9.2 Release Notes.
-
-### October 15, 2022
-
-- There is a new application in the workspace called `custom-app`. This application is a template that provides the basic building blocks (such as Material integration, session handling, login, and the API client configuration) can be used as a starting point for building new applications. See [`readme.md`](./imxweb/projects/custom-app/readme.md) for more information.
-
-### September 27, 2022
-
-- The repository has been updated with the source code for the Identity Manager 9.1 release in the `v91` branch.
-- Added clarification on the [required node.js version](#installing-nodejs).
-
-### July 29, 2022
-
-- The repository has been updated with the source code for the Identity Manager 9.0 release in the `v90` branch.
-- The build now supports case-sensitive file systems (namely Linux) in the `v90` branch.
-
-### June 7, 2022
-
-- Added clarification on the [branches](#branches-and-update-policy).
-- The `v82` branch has been updated with the contents of the 8.2.1 rollup package.
-- The build definition has been split into separate steps for each package.
-
-### May 2, 2022
-
-The repository has been updated with the code changes for the Identity Manager 8.2.1 release.
+We are working on setting up the `v93` branch with the source code for the beta version of the Identity Manager 9.3 Angular UI.
+This code is only intended for reference purposes as Identity Manager 9.3 is not yet released.
 
 ## About the repository
 
@@ -274,9 +31,12 @@ Each Angular library and app belongs to a folder in the `projects` directory. Th
 | `qer` | Angular library        | `qbm`                             |
 | `tsb` | Angular plugin library | `qbm`, `qer`                      |
 | `att` | Angular plugin library | `qbm`, `qer`                      |
+| `rmb` | Angular plugin library | `qbm`, `qer`                      |
 | `rms` | Angular plugin library | `qbm`, `qer`                      |
 | `rps` | Angular plugin library | `qbm`, `qer`                      |
+| `sac` | Angular plugin library | `qbm`, `qer`                      |
 | `aad` | Angular plugin library | `qbm`, `qer`, `tsb`               |
+| `apc` | Angular plugin library | `qbm`, `qer`                      |
 | `aob` | Angular plugin library | `qbm`, `qer`                      |
 | `uci` | Angular plugin library | `qbm`, `qer`                      |
 | `cpl` | Angular plugin library | `qbm`, `qer`                      |
@@ -344,10 +104,10 @@ The following table shows the branches in this repository corresponding to each 
 
 | Branch   | Product version                                                                                                                      | Angular version |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| `v93`    | Identity Manager 9.3.x                                                                                                               | 18              |
 | `v92`    | Identity Manager 9.2.x                                                                                                               | 14              |
 | `v91`    | Identity Manager 9.1.x                                                                                                               | 13              |
 | `v90`    | Identity Manager 9.0                                                                                                                 | 13              |
-| `v82`    | Identity Manager 8.2.x                                                                                                               | 11              |
 | `master` | The `master` branch does not correspond to a supported version of Identity Manager. Do not use this branch for development purposes. |                 |
 
 Please also see the [version compatibility table](https://angular.io/guide/versions).
