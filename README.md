@@ -62,27 +62,13 @@ For more information about each project, see the `readme.md` files in each proje
 | `qer-app-pwdportal`         | Password Reset Portal                             | Angular app  | `qbm`, `qer`        |
 | `custom-app`                | Template for custom applications                  | Angular app  | `qbm`               |
 
-## Installing Node.js
+## Dependencies
 
-Verify that you have installed a compatible `node.js` version for your branch. The version used by the CI build is defined in the [`.github/workflows/npm-build.yml`](.github/workflows/npm-build.yml) file in the `node-version` property. Other versions of `node.js`, including newer versions, are not guaranteed to be compatible with other Angular versions. Please see the [version compatibility table](https://angular.io/guide/versions) on the official Angular site.
+Identity Manager 9.3 is based on Angular 18.
 
-## Building
+Verify that you have installed a compatible `node.js` version. The version used by the CI build is defined in the [`.github/workflows/npm-build.yml`](.github/workflows/npm-build.yml) file in the `node-version` property. Other versions of `node.js`, including newer versions, are not guaranteed to be compatible with other Angular versions. Please see the [version compatibility table](https://v18.angular.dev/reference/versions) on the official Angular site.
 
-To install the required dependencies, run `npm install` in the root folder of the workspace.
-
-To build any library or app, run `npm build <name>`. Note that you must build each library in the correct order; along with any plugins that you want to include. For example, to build `qer-app-portal`, you need to build at least the following in this order:
-
-- `qbm`
-- `qer`
-- `qer-app-portal`
-
-## Customizing libraries
-
-When changing the code of a _library_, you will need to build and deploy customized versions of all the apps that should use the customized versions. For example, changing `qer` will require that you also compile `qer-app-portal`, `qer-app-operationssupport` and `qer-app-pwdportal` because all of these apps include `qbm`.
-
-When changing the code of a _plugin library_, you will need to build and deploy customized versions of the plugin library itself, and all plugin libraries depending on it. For example, changing `tsb` will require that you also compile `aad` and `o3t` because these plugins include `tsb`.
-
-### Debugging
+## Debugging
 
 Running and debugging web applications is possible using the default tools of the Angular CLI toolchain. For example, you can use `ng serve qer-app-portal` to debug the Portal app.
 
@@ -94,34 +80,11 @@ imxclient.exe run-apiserver -B
 
 The web apps will connect to the API Server using the URL defined in the application's `environment.ts` file. The default setting is `http://localhost:8182` which is the default URL that a local API Server will run on.
 
-## Getting started
-
-Please refer to the [HTML Development Guide](https://support.oneidentity.com/technical-documents/identity-manager/8.2.1/html5-development-guide#TOPIC-1801966) for step-by-step instructions on getting started.
-
-## Branches and Update Policy
-
-The following table shows the branches in this repository corresponding to each product version.
-
-| Branch   | Product version                                                                                                                      | Angular version |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `v93`    | Identity Manager 9.3.x                                                                                                               | 18              |
-| `v92`    | Identity Manager 9.2.x                                                                                                               | 14              |
-| `v91`    | Identity Manager 9.1.x                                                                                                               | 13              |
-| `v90`    | Identity Manager 9.0                                                                                                                 | 13              |
-| `master` | The `master` branch does not correspond to a supported version of Identity Manager. Do not use this branch for development purposes. |                 |
-
-Please also see the [version compatibility table](https://angular.io/guide/versions).
-
-We plan to push updates for each minor and major product release, allowing developers to track source code changes from one version to the next. Occasionally we may also publish important bug fixes.
-
-## Step-by-step guides
-
-- [Theming guide](./imxweb/custom-theme/readme.md)
-- [CDR guide](./imxweb/projects/qbm/src/lib/cdr/Readme.md)
-
 ## Documentation
 
-There are two ways to install the documentation locally. The result will be stored in _\imxweb\documentation\<projectname>_.
+Please refer to the [HTML Development Guide](https://support.oneidentity.com/technical-documents/identity-manager/9.3/html5-development-guide) for step-by-step instructions on getting started, building and deploying applications.
+
+This repository also contains component-based documentation. There are two ways to install this documentation locally. The result will be stored in _\imxweb\documentation\<projectname>_.
 
 ### 1. Using Compodoc (preferred)
 
@@ -135,6 +98,12 @@ This method only works for `qbm`, `qer` and the applications.
 
 1. Navigate to _imxweb_.
 2. run `npm run doc:<projectname>`
+
+## Additional resources
+
+- [Theming guide](./imxweb/custom-theme/readme.md)
+- [CDR guide](./imxweb/projects/qbm/src/lib/cdr/Readme.md)
+- [API Plugin Development](https://github.com/OneIdentity/IdentityManager.ApiSdk)
 
 ## Contributing
 
