@@ -166,6 +166,7 @@ export class AttestationCasesService {
     return {
       current: approverContainer.approverNow,
       future: approverContainer.approverFuture,
+      canSeeSteps: approverContainer.canSeeSteps,
     };
   }
 

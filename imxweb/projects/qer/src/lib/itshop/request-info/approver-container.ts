@@ -37,6 +37,8 @@ export class ApproverContainer {
    */
   public approverNow: EntityData[] = [];
 
+  public canSeeSteps: boolean;
+
   /**
    * List of next approvers
    */
@@ -119,6 +121,8 @@ export class ApproverContainer {
   private initApproverContainer(canSeeCurrent: boolean, canSeeNext: boolean): void {
     const orderedWorkingSteps = this.buildOrderedWorkingSteps();
     this.logger?.trace(this, 'working steps with order', orderedWorkingSteps);
+
+    this.canSeeSteps = this.request.pwoData?.WorkflowSteps?.Entities.length > 0;
 
     if (canSeeCurrent) {
       const currentSteps = orderedWorkingSteps.filter((step) => step.order === 1);
