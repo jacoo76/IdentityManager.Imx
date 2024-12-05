@@ -4,10 +4,10 @@
 
 ## Change log
 
-### November 11, 2024
+### December 5, 2024
 
-We are working on setting up the `v93` branch with the source code for the beta version of the Identity Manager 9.3 Angular UI.
-This code is only intended for reference purposes as Identity Manager 9.3 is not yet released.
+The `v93` branch contains the source code for the Identity Manager 9.3 Angular UI workspace.
+This code is in "beta" status and only intended for reference purposes until Identity Manager 9.3 is released.
 
 ## About the repository
 
