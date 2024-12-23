@@ -11,10 +11,27 @@ $inputWidth: calc(40vw + 2px);
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: $iris-blue;
+  background-color: $brand-orange;
   color: $white;
   align-items: center;
 }
+
+.mat-raised-button{
+  color: $brand-orange;
+}
+
+.imx-button:hover {
+  background-color: $brand-orange;
+  color: $custom-white;
+  border: 1px solid $custom-white;
+}
+
+.imx-button:focus {
+  background-color: $brand-orange;
+  color: $custom-white;
+  border: 1px solid $custom-white;
+}
+
 
 .imx-loginFormcontainer {
   min-height: 400px;
