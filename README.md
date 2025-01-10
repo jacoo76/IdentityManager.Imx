@@ -14,6 +14,7 @@
 - 468962: Method confirmGeneral returns a valid value on OkResult.
 - 465213: Fixes an infinite loop if the an invalid value is set on a basic CDR.
 - 460757: Approval parameters are read/written interactively.
+  **Important**: This fix requires the server-side fix 460757 to be installed.
 - 468375: Fixes an issue, with the date parsing for data dependencies scripts on the request form.
 - 466517: Fixes cut text on the request history page.
 - 459617: Fixes an issue with new-line stings on CDR.
