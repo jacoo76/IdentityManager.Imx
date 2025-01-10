@@ -26,9 +26,9 @@ $custom-typography: mat.define-typography-config(
 @include mat.core($custom-typography);
 
 // Define the custom theme.
-$primary: mat.define-palette($gunmetal-palette);
+$primary: mat.define-palette($corbin-orange-palette);
 $accent: mat.define-palette($corbin-orange-palette);
-$warn: mat.define-palette($phoenix-red-palette);
+$warn: mat.define-palette($corbin-orange-palette);
 
 $theme: mat.define-light-theme(
   (
@@ -40,7 +40,7 @@ $theme: mat.define-light-theme(
   )
 );
 // Rename the $theme-name variable to your theme's name. (e.g.space-theme)
-$theme-name: 'custom-theme';
+$theme-name: 'orng-theme';
 
 @include theme.theme($theme-name, $theme);
 @include imx-theme.theme($theme-name, $theme);
