@@ -1,0 +1,10 @@
+{
+  "Themes": [
+    {
+      "Name": "brand-orange-theme",
+      "DisplayName": "Orange Theme",
+      "Class": "eui-orange-theme",
+      "Urls": ["../brand-orange-theme/custom-theme.css"]
+    }
+  ]
+}
