@@ -7,7 +7,7 @@
     <imx-badge-tile
       data-imx-identifier="start-tile-shopping-cart"
       [caption]="'#LDS#Heading Products in Shopping Cart' | translate"
-      *ngIf="userConfig?.IsITShopEnabled && GetCountProductsinShoppingCart() > 0"
+      *ngIf="userConfig?.IsITShopEnabled && GetCountProductsinShoppingCart() >= 0"
       [value]="GetCountProductsinShoppingCart()"
       [identifier]="'shopping-cart'"
       (actionClick)="GoToShoppingCart()"
@@ -18,7 +18,7 @@
       data-imx-identifier="start-tile-it-shop-approvals"
       [caption]="'#LDS#Heading Pending Requests' | translate"
       [tooltip]="'#LDS#Shows the pending requests you can approve or deny.' | translate"
-      *ngIf="userConfig?.IsITShopEnabled && GetCountPendingRequests() > 0"
+      *ngIf="userConfig?.IsITShopEnabled && GetCountPendingRequests() >= 0"
       [value]="GetCountPendingRequests()"
       [identifier]="'it-shop-approvals'"
       (actionClick)="GoToItshopApprovals()"

@@ -51,6 +51,7 @@ export class InitService {
     this.addRoutes(routes);
 
     this.extService.register('Dashboard-SmallTiles', { instance: DashboardPluginComponent });
+  //  this.extService.register('Dashboard-SmallTiles', { instance: DashboardPluginComponent });
     this.extService.register('groupSidesheet', {
       instance: AttestationWrapperComponent,
       inputData: {
