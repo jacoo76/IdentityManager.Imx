@@ -75,21 +75,23 @@ export class InitService {
         title: '#LDS#Compliance',
         sorting: '25',
         items: [
-          {
-            id: 'POL_Policies',
-            route: 'compliance/policies',
-            title: '#LDS#Menu Entry Company policies',
-            sorting: '20-10',
-          },
-          {
-            id: 'POL_policy-violations',
-            route: 'compliance/policyviolations',
-            title: '#LDS#Menu Entry Policy violations',
-            sorting: '20-10',
-          }
+          // {
+          //   id: 'POL_Policies',
+          //   route: 'compliance/policies',
+          //   title: '#LDS#Menu Entry Company policies',
+          //   sorting: '20-10',
+          // },
+          // {
+          //   id: 'POL_policy-violations',
+          //   route: 'compliance/policyviolations',
+          //   title: '#LDS#Menu Entry Policy violations',
+          //   sorting: '20-10',
+          // }
         ]
       };
-
+      if (menu.items.length === 0) {
+        return null;
+      }
       return menu;
     });
   }

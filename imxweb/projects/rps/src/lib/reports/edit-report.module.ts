@@ -95,16 +95,16 @@ export class EditReportModule {
         const items: MenuItem[] = [];
 
         if (preProps.includes('REPORT_SUBSCRIPTION')) {
-          items.push(
-            {
-              id: 'RPS_Reports',
-              navigationCommands: {
-                commands: ['reports']
-              },
-              title: '#LDS#Menu Entry Reports',
-              sorting: '60-70',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'RPS_Reports',
+          //     navigationCommands: {
+          //       commands: ['reports']
+          //     },
+          //     title: '#LDS#Menu Entry Reports',
+          //     sorting: '60-70',
+          //   },
+          // );
         }
 
         if (items.length === 0) {

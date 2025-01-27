@@ -89,14 +89,14 @@ export class RiskConfigModule {
         const items: MenuItem[] = [];
 
         if (isRuleAdmin(features) && preProps.includes('RISKINDEX')) {
-          items.push(
-            {
-              id: 'QER_Setup_RiskConfig',
-              route: 'configuration/risk',
-              title: '#LDS#Menu Entry Risk index functions',
-              sorting: '50-50',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'QER_Setup_RiskConfig',
+          //     route: 'configuration/risk',
+          //     title: '#LDS#Menu Entry Risk index functions',
+          //     sorting: '50-50',
+          //   },
+          // );
         }
 
         if (items.length === 0) {

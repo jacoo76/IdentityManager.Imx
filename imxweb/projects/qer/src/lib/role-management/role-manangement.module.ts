@@ -163,7 +163,7 @@ export class RoleManangementModule {
     });
     this.router.resetConfig(config);
 
-    this.setupMenu();
+   // this.setupMenu();
     this.setupDataExplorer();
     this.setupMyResponsibilitiesView();
   }
@@ -233,15 +233,20 @@ export class RoleManangementModule {
         title: '#LDS#Data administration',
         sorting: '40',
         items: [
-          {
-            id: 'QER_DataExplorer',
-            navigationCommands: { commands: ['admin', 'dataexplorer'] },
-            title: '#LDS#Menu Entry Data Explorer',
-            sorting: '40-10',
-          },
+          // {
+          //   id: 'QER_DataExplorer',
+          //   navigationCommands: { commands: ['admin', 'dataexplorer'] },
+          //   title: '#LDS#Menu Entry Data Explorer',
+          //   sorting: '40-10',
+          // },
         ],
       };
-      return menu;
+      if (menu.items.length === 0) {
+        return null;
+      }
+
+      return null;
+    //  return menu;
     });
   }
   private setupMyResponsibilitiesView(): void {

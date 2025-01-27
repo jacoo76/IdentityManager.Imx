@@ -127,7 +127,7 @@ export class RequestTableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   @Input() public isReadOnly: boolean;
-  @Input() public uidRecipientRequester: string;
+  @Input() public uidRecipientRequester: string; // can be used for data binding in order to display Request History that relevant only to the logged in user
   @Input() public isArchivedRequests: boolean;
   @Input() public uidRecipient: string;
 

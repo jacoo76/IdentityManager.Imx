@@ -187,7 +187,7 @@ export class InitService {
       withAnalysis: true,
     });
 
-    this.setupMenu();
+   // this.setupMenu();
 
     this.dataExplorerRegistryService.registerFactory(
       (preProps: string[], features: string[], projectConfig: ProjectConfig, groups: string[]) => {
@@ -232,16 +232,20 @@ export class InitService {
         title: '#LDS#Data administration',
         sorting: '40',
         items: [
-          {
-            id: 'QER_DataExplorer',
-            navigationCommands: { commands: ['admin', 'dataexplorer'] },
-            title: '#LDS#Menu Entry Data Explorer',
-            sorting: '40-10',
-          },
+          // {
+          //   id: 'QER_DataExplorer',
+          //   navigationCommands: { commands: ['admin', 'dataexplorer'] },
+          //   title: '#LDS#Menu Entry Data Explorer',
+          //   sorting: '40-10',
+          // },
         ],
       };
+      if (menu.items.length === 0) {
+        return null;
+      }
 
-      return menu;
+      return null;
+     // return menu;
     });
   }
 

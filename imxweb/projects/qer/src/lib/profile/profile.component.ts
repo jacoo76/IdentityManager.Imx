@@ -244,12 +244,36 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       this.cdrList = (this.columns ?? []).map(columnName => {
         const column = this.selectedIdentity.GetColumn(columnName);
+
         return {
           column,
-          isReadOnly: () => !column.GetMetadata().CanEdit(),
+          isReadOnly: () => column.ColumnName === 'ContactEmail' ? false : true,
           hint: this.hints[columnName]
         };
-      });
+      })
+      .filter(item => item.column.ColumnName !== "Fax");
+
+
+      // this.cdrList = (this.columns ?? []).map(columnName => {
+      //   const column = this.selectedIdentity.GetColumn(columnName);
+      //  // const roFlag: boolean = column.ColumnName === 'ContactEmail' ? false : true;
+      //  // console.log("Flag:" + roFlag);
+       
+        
+      //   // console.log(column.GetMetadata().CanEdit());
+      //   // console.log(column.GetMetadata().CanSee());
+
+      //   return {
+      //     column,
+      //   //  isReadOnly: () => !column.GetMetadata().CanEdit(),
+      //     isReadOnly: () => column.ColumnName === 'ContactEmail' ? false : true
+      //   };
+      // })
+      // .filter(item => item.column.ColumnName !== "Fax");
+
+      // console.log(this.cdrList);
+
+      // this.cdrList.forEach(item => console.log("L: " + item.isReadOnly()));
 
       this.mailInfo = await this.mailSvc.getMailsThatCanBeUnsubscribed(userUid);
       this.hasMailSubscriptions = this.mailInfo.length > 0;

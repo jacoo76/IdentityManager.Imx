@@ -86,14 +86,14 @@ export class ServiceItemsEditModule {
         const items: MenuItem[] = [];
 
         if (isShopAdmin(features)) {
-          items.push(
-            {
-              id: 'QER_ServiceItems',
-              navigationCommands: { commands: ['admin', 'serviceitems'] },
-              title: '#LDS#Menu Entry Service items',
-              sorting: '60-40',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'QER_ServiceItems',
+          //     navigationCommands: { commands: ['admin', 'serviceitems'] },
+          //     title: '#LDS#Menu Entry Service items',
+          //     sorting: '60-40',
+          //   },
+          // );
         }
 
         if (items.length === 0) {

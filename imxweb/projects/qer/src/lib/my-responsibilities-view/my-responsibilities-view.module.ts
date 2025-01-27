@@ -63,7 +63,7 @@ export class MyResponsibilitiesViewModule {
     });
     this.router.resetConfig(config);
     logger.info(this, '▶️ MyResponsibilitiesViewModule loaded');
-    this.setupMenu();
+   // this.setupMenu();
   }
 
   private setupMenu(): void {

@@ -190,38 +190,42 @@ export class InitService {
           return null;
         }
 
-        return {
-          id: 'ROOT_Responsibilities',
-          title: '#LDS#Responsibilities',
-          sorting: '30',
-          items: [
-            {
-              id: 'QER_Responsibilities_AssignOwnership',
-              route: 'claimgroup',
-              title: '#LDS#Menu Entry System entitlement ownership',
-              sorting: '30-20',
-            },
-          ],
-        };
+        return null;
+
+        // return {
+        //   id: 'ROOT_Responsibilities',
+        //   title: '#LDS#Responsibilities',
+        //   sorting: '30',
+        //   items: [
+        //     {
+        //       id: 'QER_Responsibilities_AssignOwnership',
+        //       route: 'claimgroup',
+        //       title: '#LDS#Menu Entry System entitlement ownership',
+        //       sorting: '30-20',
+        //     },
+        //   ],
+        // };
       },
       (preProps: string[], features: string[], projectConfig: ProjectConfig, groups: string[]) => {
         if (!preProps.includes('ITSHOP') || !isTsbNameSpaceAdminBase(groups)) {
           return null;
         }
 
-        return {
-          id: 'ROOT_Data',
-          title: '#LDS#Data administration',
-          sorting: '40',
-          items: [
-            {
-              id: 'QER_DataExplorer',
-              navigationCommands: { commands: ['admin', 'dataexplorer'] },
-              title: '#LDS#Menu Entry Data Explorer',
-              sorting: '40-10',
-            },
-          ],
-        };
+        return null;
+
+        // return {
+        //   id: 'ROOT_Data',
+        //   title: '#LDS#Data administration',
+        //   sorting: '40',
+        //   items: [
+        //     {
+        //       id: 'QER_DataExplorer',
+        //       navigationCommands: { commands: ['admin', 'dataexplorer'] },
+        //       title: '#LDS#Menu Entry Data Explorer',
+        //       sorting: '40-10',
+        //     },
+        //   ],
+        // };
       }
     );
   }

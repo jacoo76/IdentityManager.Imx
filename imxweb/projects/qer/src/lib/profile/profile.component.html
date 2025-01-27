@@ -19,15 +19,16 @@
           <mat-card-content class="profile-hyperview">
             <mat-radio-group [(ngModel)]="isShowEntitlementsHyperview">
               <mat-radio-button [value]="false">
-                <span translate>#LDS#Identity overview</span>
-              </mat-radio-button>
-              <mat-radio-button [value]="true">
                 <span translate>#LDS#Assigned entitlements</span>
               </mat-radio-button>
+              <mat-radio-button [value]="true">
+                <span translate>#LDS#Identity overview</span>
+              </mat-radio-button>
+              
             </mat-radio-group>
           </mat-card-content>
         </mat-card>
-        <imx-object-hyperview [objectType]="'Person'" [objectUid]="userUid" [hyperviewName]="isShowEntitlementsHyperview ? 'VI_Person_Person_Entitlements_Overview' : ''">
+        <imx-object-hyperview [objectType]="'Person'" [objectUid]="userUid" [hyperviewName]="!isShowEntitlementsHyperview ? 'VI_Person_Person_Entitlements_Overview' : ''">
         </imx-object-hyperview>
       </ng-template>
     </mat-tab>

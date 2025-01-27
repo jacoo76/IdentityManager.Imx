@@ -31,9 +31,24 @@ import { UserConfig, ProjectConfig, QerProjectConfig } from 'imx-api-qer';
 import { UserModelService } from '../../user/user-model.service';
 import { PendingItemsType } from '../../user/pending-items-type.interface';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
-import { imx_SessionService, SystemInfoService } from 'qbm';
+import { AppConfigService, imx_SessionService, SystemInfoService } from 'qbm';
 import { SystemInfo } from 'imx-api-qbm';
 import { DashboardService } from './dashboard.service';
+import { MethodDescriptor, TimeZoneInfo } from 'imx-qbm-dbts';
+import { EuiAlertComponent } from '@elemental-ui/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+interface fullName {
+  FirstName: string;
+  LastName: string;
+}
+
+interface warningData {
+  ConfigParamEnabled: boolean;
+  MemberOfDepartment: boolean;
+  WarningMessage: string;
+}
 
 @Component({
   templateUrl: './start.component.html',
@@ -47,6 +62,11 @@ export class StartComponent implements OnInit {
   public systemInfo: SystemInfo;
   public viewReady: boolean;
   public userUid: string;
+  public firstName: string;
+  public lastName: string;
+  public configParamEnabled: boolean = false;
+  public isInDepartment: boolean = false;
+  public warningMessage: string;
 
   constructor(
     public readonly router: Router,
@@ -55,7 +75,9 @@ export class StartComponent implements OnInit {
     private readonly systemInfoService: SystemInfoService,
     private readonly sessionService: imx_SessionService,
     private readonly detectRef: ChangeDetectorRef,
-    private readonly projectConfigurationService: ProjectConfigurationService
+    private readonly projectConfigurationService: ProjectConfigurationService,
+    private readonly config: AppConfigService,
+    private snackBar: MatSnackBar
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -70,6 +92,8 @@ export class StartComponent implements OnInit {
       this.projectConfig = await this.projectConfigurationService.getConfig();
       this.systemInfo = await this.systemInfoService.get();
       this.userUid = (await this.sessionService.getSessionState()).UserUid;
+      this.GetUserFirstLastName();
+      this.GetDepartmentWarnings();
     } finally {
       busy.endBusy();
     }
@@ -161,4 +185,67 @@ export class StartComponent implements OnInit {
     // Starting a new request is only allowed when the session has an identity and the ITShop(Requests) feature is enabled
     return this.userConfig?.IsITShopEnabled && this.userUid && this.systemInfo.PreProps.includes('ITSHOP');
   }
+
+  // Routing for custom support tile
+  public GoToCCCGetSupport(): void {
+    this.router.navigate(['get-support']);
+  }
+
+  // Function to fetch the Firstname n Lastname using my custom endpoint 'portal/person/get_firstname_lastname'
+  private FetchUserFirstLastName(): MethodDescriptor<void>{
+    console.log("FetchUserFirstLastName", new Date().getTime());
+    return {
+      path: `/portal/person/get_firstname_lastname`,
+      parameters: [],
+      method: 'GET',
+      headers: {
+        'imx-timezone': TimeZoneInfo.get()
+      },
+      credentials: 'include',
+      observe: 'response',
+      responseType: 'json'
+    };
+  }
+
+  // call the endpoint and store the returned data into variables
+  public async GetUserFirstLastName(): Promise<void>{
+    console.log("GetUserFirstLastName", new Date().getTime());
+    let returnedObject = await this.config.apiClient.processRequest<fullName>(this.FetchUserFirstLastName());
+    console.log(returnedObject);
+    this.firstName = returnedObject.FirstName;
+    this.lastName = returnedObject.LastName;
+  }
+
+
+  // Function to fetch the Warning data using my custom endpoint 'portal/warnings/department'
+  private FetchDepartmentWarnings(): MethodDescriptor<void>{
+    console.log("FetchDepartmentWarnings", new Date().getTime());
+    return {
+      path: `/portal/warnings/department`,
+      parameters: [],
+      method: 'GET',
+      headers: {
+        'imx-timezone': TimeZoneInfo.get()
+      },
+      credentials: 'include',
+      observe: 'response',
+      responseType: 'json'
+    };
+  }
+
+
+  // call the endpoint and store the returned warning data into variables
+  public async GetDepartmentWarnings(): Promise<void>{
+    console.log("GetDepartmentWarnings", new Date().getTime());
+    let returnedObject = await this.config.apiClient.processRequest<warningData>(this.FetchDepartmentWarnings());
+    console.log(returnedObject);
+    this.isInDepartment = returnedObject.MemberOfDepartment;
+    this.configParamEnabled = returnedObject.ConfigParamEnabled;
+    this.warningMessage = returnedObject.WarningMessage;
+  }
+
+  showSnackBar() {
+    this.snackBar.open('I\'ve informed.', 'OK');
+  }
+
 }

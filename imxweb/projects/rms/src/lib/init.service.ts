@@ -235,19 +235,21 @@ export class InitService {
       if (!isRoleAdmin(features) && !isRoleStatistics(features) && !isAuditor(groups)) {
         return null;
       }
-      return {
-        id: 'ROOT_Data',
-        title: '#LDS#Data administration',
-        sorting: '40',
-        items: [
-          {
-            id: 'QER_DataExplorer',
-            navigationCommands: { commands: ['admin', 'dataexplorer'] },
-            title: '#LDS#Menu Entry Data Explorer',
-            sorting: '40-10',
-          },
-        ],
-      };
+
+      return null;
+      // return {
+      //   id: 'ROOT_Data',
+      //   title: '#LDS#Data administration',
+      //   sorting: '40',
+      //   items: [
+      //     {
+      //       id: 'QER_DataExplorer',
+      //       navigationCommands: { commands: ['admin', 'dataexplorer'] },
+      //       title: '#LDS#Menu Entry Data Explorer',
+      //       sorting: '40-10',
+      //     },
+      //   ],
+      // };
     });
   }
 

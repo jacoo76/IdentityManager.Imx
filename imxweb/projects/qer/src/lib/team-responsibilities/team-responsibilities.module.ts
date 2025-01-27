@@ -89,17 +89,19 @@ export class TeamResponsibilitiesModule {
 
         const items: MenuItem[] = [];
         if (isPersonManager(groups)) {
-          return {
-            id: 'ROOT_Responsibilities',
-            title: '#LDS#Responsibilities',
-            sorting: '30',
-            items: [{
-              id: 'QER_Team_Responsibilities',
-              navigationCommands: { commands: ['teamresponsibilities'] },
-              title: '#LDS#Menu Entry Responsibilities of my reports',
-              sorting: '30-10',
-            }]
-          };
+          return null;
+
+          // return {
+          //   id: 'ROOT_Responsibilities',
+          //   title: '#LDS#Responsibilities',
+          //   sorting: '30',
+          //   items: [{
+          //     id: 'QER_Team_Responsibilities',
+          //     navigationCommands: { commands: ['teamresponsibilities'] },
+          //     title: '#LDS#Menu Entry Responsibilities of my reports',
+          //     sorting: '30-10',
+          //   }]
+          // };
         }
       },
     );

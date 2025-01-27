@@ -122,27 +122,28 @@ export class ResourcesModule {
     });
     this.router.resetConfig(config);
     this.init();
-    this.setupMenu();
+   // this.setupMenu();
   }
 
   private setupMenu(): void {
     this.menuService.addMenuFactories((preProps: string[], features: string[], projectConfig: ProjectConfig, groups: string[]) => {
-      if (isResourceAdmin(features) || isAuditor(groups)) {
-        return {
-          id: 'ROOT_Data',
-          title: '#LDS#Data administration',
-          sorting: '40',
-          items: [
-            {
-              id: 'QER_DataExplorer',
-              navigationCommands: { commands: ['admin', 'dataexplorer'] },
-              title: '#LDS#Menu Entry Data Explorer',
-              sorting: '40-10',
-            },
-          ],
-        };
-      }
+       if (isResourceAdmin(features) || isAuditor(groups)) {
+      //   return {
+      //     id: 'ROOT_Data',
+      //     title: '#LDS#Data administration',
+      //     sorting: '40',
+      //     items: [
+      //       {
+      //         id: 'QER_DataExplorer',
+      //         navigationCommands: { commands: ['admin', 'dataexplorer'] },
+      //         title: '#LDS#Menu Entry Data Explorer',
+      //         sorting: '40-10',
+      //       },
+      //     ],
+      //   };
+      // }
       return null;
+       }
     });
   }
 

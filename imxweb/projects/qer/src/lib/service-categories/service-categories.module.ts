@@ -94,14 +94,14 @@ export class ServiceCategoriesModule {
         const items: MenuItem[] = [];
 
         if (isShopAdmin(features) || isShopStatistics(features)) {
-          items.push(
-            {
-              id: 'QER_Setup_Servicecategories',
-              route: 'configuration/servicecategories',
-              title: '#LDS#Menu Entry Service categories',
-              sorting: '60-30'
-            }
-          );
+          // items.push(
+          //   {
+          //     id: 'QER_Setup_Servicecategories',
+          //     route: 'configuration/servicecategories',
+          //     title: '#LDS#Menu Entry Service categories',
+          //     sorting: '60-30'
+          //   }
+          // );
         }
 
         if (items.length === 0) {

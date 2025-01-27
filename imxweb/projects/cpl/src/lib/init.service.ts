@@ -121,15 +121,17 @@ export class InitService {
       const items = [];
 
       if (isRuleStatistics(features)) {
-        items.push({
-          id: 'CPL_Compliance_Rules',
-          route: 'compliance/rules',
-          title: '#LDS#Menu Entry Compliance rules',
-          description: '#LDS#Shows an overview of compliance rules.',
-          sorting: '25-10',
-        });
+        // items.push({
+        //   id: 'CPL_Compliance_Rules',
+        //   route: 'compliance/rules',
+        //   title: '#LDS#Menu Entry Compliance rules',
+        //   description: '#LDS#Shows an overview of compliance rules.',
+        //   sorting: '25-10',
+        // });
       }
-
+      if (items.length === 0) {
+        return null;
+      }
       const menu: MenuItem = {
         id: 'ROOT_Compliance',
         title: '#LDS#Compliance',

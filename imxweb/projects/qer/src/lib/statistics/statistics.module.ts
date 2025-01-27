@@ -142,13 +142,15 @@ export class StatisticsModule {
   private setupMenu(): void {
     this.menuService.addMenuFactories((preProps: string[], features: string[]) => {
       if(isStatistics(features)){
-        const menu: MenuItem = {
-          id: 'ROOT_Statistics',
-          title: '#LDS#Statistics',
-          sorting: '50',
-          route: routes[0].path,
-        };
-        return menu;
+        // const menu: MenuItem = {
+        //   id: 'ROOT_Statistics',
+        //   title: '#LDS#Statistics',
+        //   sorting: '50',
+        //   route: routes[0].path,
+        // };
+       // return menu;
+
+        return null;
       }
     });
   }

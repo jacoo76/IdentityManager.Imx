@@ -106,17 +106,17 @@ export class RulesViolationsModule {
         const items: MenuItem[] = [];
 
         if (preProps.includes('ITSHOP') && isExceptionAdmin(groups)) {
-          items.push(
-            {
-              id: 'CPL_Compliance_RulesViolations',
-              navigationCommands: {
-                commands: ['compliance', 'rulesviolations', 'approve']
-              },
-              title: '#LDS#Menu Entry Rule violations',
-              description: '#LDS#Shows the rule violations for which you can grant or deny exceptions.',
-              sorting: '25-20',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'CPL_Compliance_RulesViolations',
+          //     navigationCommands: {
+          //       commands: ['compliance', 'rulesviolations', 'approve']
+          //     },
+          //     title: '#LDS#Menu Entry Rule violations',
+          //     description: '#LDS#Shows the rule violations for which you can grant or deny exceptions.',
+          //     sorting: '25-20',
+          //   },
+          // );
         }
 
         if (items.length === 0) {

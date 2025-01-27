@@ -102,14 +102,14 @@ export class DelegationModule {
         const items: MenuItem[] = [];
 
         if (preProps.includes('ITSHOP') && preProps.includes('DELEGATION')) {
-          items.push(
-            {
-              id: 'QER_Responsibilities_Delegation',
-              route: 'delegation',
-              title: '#LDS#Menu Entry Delegation',
-              sorting: '30-10',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'QER_Responsibilities_Delegation',
+          //     route: 'delegation',
+          //     title: '#LDS#Menu Entry Delegation',
+          //     sorting: '30-10',
+          //   },
+          // );
         }
 
         if (items.length === 0) {

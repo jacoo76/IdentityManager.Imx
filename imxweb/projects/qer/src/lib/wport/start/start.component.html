@@ -1,7 +1,8 @@
-<h2 class="mat-headline">{{ '#LDS#Welcome' | translate }}</h2>
+<h2 class="mat-headline">{{ '#LDS#Welcome' | translate }} {{ firstName }} {{ lastName }}</h2>
 
 <imx-busy-indicator *ngIf="!viewReady"></imx-busy-indicator>
 
+<eui-alert *ngIf="configParamEnabled && isInDepartment" type="warning" colored="true" dismissable="true" (dismissed)="showSnackBar()">{{ warningMessage }}</eui-alert>
 <ng-container>
   <div [ngClass]="{ hidden: !viewReady, 'imx-flexible-tile-row': true }">
     <imx-badge-tile
@@ -136,6 +137,23 @@
         </button>
       </ng-template>
     </imx-icon-tile>
+
+    <imx-icon-tile
+      data-imx-identifier="start-tile-get-support"
+      [caption]="'#LDS#Get Support' | translate"
+      [subtitle]="'#LDS#Request for support.' | translate"
+      [image]="'request'"
+      [identifier]="'get-support'"
+    >
+      <ng-template #ActionTemplate>
+        <button mat-button color="primary" [attr.data-imx-identifier]="'imx-start-button-get-support'" (click)="GoToCCCGetSupport()">
+          <span>{{ '#LDS#Request support' | translate }}</span>
+          <eui-icon size="m" icon="forward"></eui-icon>
+        </button>
+      </ng-template>
+    </imx-icon-tile>
+
+
     <imx-ext id="Dashboard-MediumTiles"></imx-ext>
   </div>
   <div class="imx-flexible-tile-row">

@@ -128,7 +128,7 @@ export class IdentitiesModule {
     logger.info(this, '▶️ IdentitiesModule loaded');
     this.init();
     this.setupMyResponsibilitiesView();
-    this.setupMenu();
+   // this.setupMenu();
   }
 
   private setupMenu(): void {
@@ -137,14 +137,14 @@ export class IdentitiesModule {
 
         const items: MenuItem[] = [];
         if (preProps.includes('ITSHOP') && (isPersonAdmin(features) || isAuditor(groups))) {
-          items.push(
-            {
-              id: 'QER_DataExplorer',
-              navigationCommands: { commands: ['admin', 'dataexplorer'] },
-              title: '#LDS#Menu Entry Data Explorer',
-              sorting: '40-10',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'QER_DataExplorer',
+          //     navigationCommands: { commands: ['admin', 'dataexplorer'] },
+          //     title: '#LDS#Menu Entry Data Explorer',
+          //     sorting: '40-10',
+          //   },
+          // );
         }
         if (items.length === 0) {
           return null;

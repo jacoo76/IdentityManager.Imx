@@ -26,7 +26,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { QerPermissionsService } from  '../admin/qer-permissions.service';
-import { HELP_CONTEXTUAL, HelpContextualValues } from 'qbm';
+import { HELP_CONTEXTUAL, HelpContextualValues, imx_SessionService } from 'qbm'; // imx_SessionService imported so I can get the loggedin user's uid
+import { PortalPersonReports } from 'imx-api-qer';
 
 @Component({
   templateUrl: './request-history.component.html',
@@ -36,12 +37,16 @@ export class RequestHistoryComponent implements OnInit {
 
   public auditMode = false;
   contextId: HelpContextualValues;
+  public uidLoggedInUser: string; // variable to store the uid of the loggedin user - will be used to display request history which is relevant only to this specific user
+  public directReportsLoggedInUser: PortalPersonReports[];
 
   constructor(
     private readonly qerPermissionService: QerPermissionsService,
+    private readonly userSession: imx_SessionService,  // current user session - has a method to get the uid of the user 
   ) {}
 
   public async ngOnInit(): Promise<void> {
+    this.uidLoggedInUser = (await this.userSession.getSessionState()).UserUid; // storing current logged-in user UID, on initialization
     this.auditMode = await this.qerPermissionService.isShopStatistics();
     if(this.auditMode){
       this.contextId = HELP_CONTEXTUAL.RequestHistoryAuditor;

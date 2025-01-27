@@ -72,14 +72,14 @@ export class AobService {
     this.menuService.addMenuFactories((preProps: string[], features: string[]) => {
       const items: MenuItem[] = [];
       if (isAobApplicationAdmin(features) || isAobApplicationOwner(features)) {
-        items.push(
-          {
-            id: 'AOB_Data_Applications',
-            title: '#LDS#Applications',
-            navigationCommands: { commands: ['/applications', { outlets: { primary: ['navigation'], content: ['detail'] } }] },
-            sorting: '40-20',
-          }
-        );
+        // items.push(
+        //   {
+        //     id: 'AOB_Data_Applications',
+        //     title: '#LDS#Applications',
+        //     navigationCommands: { commands: ['/applications', { outlets: { primary: ['navigation'], content: ['detail'] } }] },
+        //     sorting: '40-20',
+        //   }
+        // );
       }
       if (items.length === 0) {
         return null;

@@ -126,14 +126,14 @@ export class RequestConfigModule {
         const items: MenuItem[] = [];
 
         if (isShopAdmin(features) || isShopStatistics(features)) {
-          items.push(
-            {
-              id: 'QER_Setup_ITShop',
-              route: 'configuration/requests',
-              title: '#LDS#Menu Entry Shops',
-              sorting: '60-20',
-            },
-          );
+          // items.push(
+          //   {
+          //     id: 'QER_Setup_ITShop',
+          //     route: 'configuration/requests',
+          //     title: '#LDS#Menu Entry Shops',
+          //     sorting: '60-20',
+          //   },
+          // );
         }
 
         if (items.length === 0) {

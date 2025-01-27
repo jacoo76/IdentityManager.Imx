@@ -112,12 +112,12 @@ export class ApprovalWorkFlowModule {
       const items: MenuItem[] = [];
 
       if (isShopAdmin(features) && hasFeatures(features, guardedFeatures)) {
-        items.push({
-          id: 'QER_ApprovalWorkflows',
-          navigationCommands: { commands: ['admin', 'approvalworkflowmanager'] },
-          title: '#LDS#Menu Entry Approval workflows',
-          sorting: '60-50',
-        });
+        // items.push({
+        //   id: 'QER_ApprovalWorkflows',
+        //   navigationCommands: { commands: ['admin', 'approvalworkflowmanager'] },
+        //   title: '#LDS#Menu Entry Approval workflows',
+        //   sorting: '60-50',
+        // });
       }
 
       if (items.length === 0) {
